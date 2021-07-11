@@ -1,0 +1,41 @@
+type Transaction @entity {
+  id: ID!
+  block: BigInt!
+  timestamp: BigInt!
+}
+
+type SaladBet @entity {
+  id: ID!
+  bet: Int!
+  bet2: Int!
+  value: BigInt!
+
+  salad: SaladBowl!
+  creator: Bytes!
+
+  createdTx: Transaction!
+  increasedTx: [Transaction!]
+  claimedTx: Transaction
+
+  wonJackpot: Boolean
+  feeDeducted: BigInt
+  referralBonus: BigInt
+  rewardReceived: BigInt
+}
+
+type SaladBowl @entity {
+  id: ID!
+  createdTx: Transaction!
+  expiresOn: Int!
+  status: Int!
+
+  betSum: [BigInt!]!
+
+  maxBet: SaladBet
+
+  preparedTx: Transaction
+  servedTx: Transaction
+
+  result: Int
+  jackpot: Boolean
+}
